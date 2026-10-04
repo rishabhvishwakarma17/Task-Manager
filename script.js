@@ -2,13 +2,32 @@ const addButton = document.querySelector("#add");
 const taskAdderContainer = document.querySelector(".taskAdder");
 const textAreaContainer = document.querySelector("#textarea");
 const priotityColors2 = document.querySelector(".priotityColors2");
+const allColorsOfTaskAdder = document.querySelectorAll(".color2");
+const deleteButton = document.getElementById("delete")
 
 
 let taskArray = [];
-
 let selectedColor = "red";
-
 addButton.addEventListener("click", hide);
+
+
+priotityColors2.addEventListener("click" , function(event){
+    const selectElement = event.target;
+
+    if( selectElement.classList[0] == "priotityColors2"){
+        return;
+    }
+    selectedColor = selectElement.classList[1];
+
+    allColorsOfTaskAdder.forEach( function (element){
+        element.classList.remove("border");
+    })
+
+    selectElement.classList.add("border");
+
+
+})
+
 
 textAreaContainer.addEventListener("keydown", function (event) {
     const key = event.key;
