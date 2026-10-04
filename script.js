@@ -3,23 +3,37 @@ const taskAdderContainer = document.querySelector(".taskAdder");
 const textAreaContainer = document.querySelector("#textarea");
 const priotityColors2 = document.querySelector(".priotityColors2");
 const allColorsOfTaskAdder = document.querySelectorAll(".color2");
-const deleteButton = document.getElementById("delete")
+const deleteButton = document.getElementById("delete");
 
 
 let taskArray = [];
 let selectedColor = "red";
 addButton.addEventListener("click", hide);
 
+let isDeleteActive = false;
 
-priotityColors2.addEventListener("click" , function(event){
+deleteButton.addEventListener("click", function () {
+    console.log("clickk")
+    isDeleteActive = !isDeleteActive;
+    if (isDeleteActive) {
+        // console.log("isActive");
+        deleteButton.setAttribute("fill", "red");
+    } else {
+        // console.log("is not Active");
+        deleteButton.setAttribute("fill", "black");
+    }
+})
+
+
+priotityColors2.addEventListener("click", function (event) {
     const selectElement = event.target;
 
-    if( selectElement.classList[0] == "priotityColors2"){
+    if (selectElement.classList[0] == "priotityColors2") {
         return;
     }
     selectedColor = selectElement.classList[1];
 
-    allColorsOfTaskAdder.forEach( function (element){
+    allColorsOfTaskAdder.forEach(function (element) {
         element.classList.remove("border");
     })
 
@@ -39,6 +53,7 @@ textAreaContainer.addEventListener("keydown", function (event) {
     let taskObj = {
         task: text,
         color: selectedColor,
+        id: Date.now(),
     }
     taskArray.push(taskObj);
     ticketMaker(taskArray);
@@ -51,7 +66,7 @@ const ticketContainer = document.querySelector(".taskContainer");
 function ticketMaker(tArray) {
     ticketContainer.innerHTML = "";
     tArray.forEach(function (taskObj) {
-        let { task, color } = taskObj;
+        let { task, color , id } = taskObj;
         const ticketEle = document.createElement("div");
         ticketEle.classList.add("ticket");
         ticketEle.innerHTML = `<div class="taskColor ${color}"></div>
@@ -65,11 +80,21 @@ function ticketMaker(tArray) {
           </svg>
         </div>
       </div>`
+        ticketEle.addEventListener("dblclick", function () {
+            if (isDeleteActive == false) return;
+            // UI Layer
+            ticketContainer.removeChild(ticketEle);
+            // DataBase Layer
+            let filteredTask = taskArray.filter(function (taskObj) {
+                return taskObj.id != id;
+            });
+            taskArray = filteredTask;
+        })
         ticketContainer.appendChild(ticketEle);
     })
 }
 
-
 function hide() {
     taskAdderContainer.classList.toggle("hide");
 }
+console.log(taskArray);
