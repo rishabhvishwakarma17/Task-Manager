@@ -5,13 +5,11 @@ const priotityColors2 = document.querySelector(".priotityColors2");
 const allColorsOfTaskAdder = document.querySelectorAll(".color2");
 const deleteButton = document.getElementById("delete");
 
-
 let taskArray = [];
 let selectedColor = "red";
-addButton.addEventListener("click", hide);
+let allColors = ["red", "blue", "green", "orange"];
 
 let isDeleteActive = false;
-
 deleteButton.addEventListener("click", function () {
     console.log("clickk")
     isDeleteActive = !isDeleteActive;
@@ -24,7 +22,6 @@ deleteButton.addEventListener("click", function () {
     }
 })
 
-
 priotityColors2.addEventListener("click", function (event) {
     const selectElement = event.target;
 
@@ -32,16 +29,11 @@ priotityColors2.addEventListener("click", function (event) {
         return;
     }
     selectedColor = selectElement.classList[1];
-
     allColorsOfTaskAdder.forEach(function (element) {
         element.classList.remove("border");
     })
-
     selectElement.classList.add("border");
-
-
 })
-
 
 textAreaContainer.addEventListener("keydown", function (event) {
     const key = event.key;
@@ -60,13 +52,11 @@ textAreaContainer.addEventListener("keydown", function (event) {
     hide();
 })
 
-
-
 const ticketContainer = document.querySelector(".taskContainer");
 function ticketMaker(tArray) {
     ticketContainer.innerHTML = "";
     tArray.forEach(function (taskObj) {
-        let { task, color , id } = taskObj;
+        let { task, color, id } = taskObj;
         const ticketEle = document.createElement("div");
         ticketEle.classList.add("ticket");
         ticketEle.innerHTML = `<div class="taskColor ${color}"></div>
@@ -79,7 +69,28 @@ function ticketMaker(tArray) {
             </path>
           </svg>
         </div>
-      </div>`
+      </div>` ;
+        const taskColorEle = ticketEle.querySelector(".taskColor");
+
+        taskColorEle.addEventListener("click", function () {
+            let currentColor = taskObj.color;
+            let currentColorIndex = allColors.indexOf(currentColor);
+            let nextColorIndex = 0;
+
+            if (currentColorIndex != allColors.length - 1) {
+                nextColorIndex = currentColorIndex + 1;
+            }
+
+            let nextColor = allColors[nextColorIndex];
+            // UI Layer
+            taskColorEle.classList.remove(currentColor);
+            taskColorEle.classList.add(nextColor);
+            // Data Layer
+            taskObj.color = nextColor;
+
+        })
+
+
         ticketEle.addEventListener("dblclick", function () {
             if (isDeleteActive == false) return;
             // UI Layer
@@ -94,6 +105,7 @@ function ticketMaker(tArray) {
     })
 }
 
+addButton.addEventListener("click", hide);
 function hide() {
     taskAdderContainer.classList.toggle("hide");
 }
