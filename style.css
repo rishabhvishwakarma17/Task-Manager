@@ -12,6 +12,7 @@ nav {
   justify-content: space-around;
   align-items: center;
 }
+
 .priotityColors {
   height: 60%;
   width: 30%;
@@ -21,23 +22,29 @@ nav {
   align-items: center;
   border-radius: 10px;
 }
+
 .color {
   height: 60%;
   width: 20%;
   border-radius: 10px;
 }
+
 .red {
   background-color: red;
 }
+
 .blue {
   background-color: blue;
 }
+
 .green {
   background-color: green;
 }
+
 .orange {
   background-color: orange;
 }
+
 .options {
   height: 60%;
   width: 10%;
@@ -47,6 +54,7 @@ nav {
   align-items: center;
   border-radius: 10px;
 }
+
 .taskContainer {
   background-color: #f6f4e8;
   height: 90vh;
@@ -56,6 +64,7 @@ nav {
   align-items: flex-start;
   padding: 10px;
 }
+
 .ticket {
   margin: 10px;
   height: 35vh;
@@ -70,6 +79,7 @@ nav {
   height: 10%;
   width: 100%;
 }
+
 .ticketTaskContainer {
   /* background-color: blue; */
   padding: 5px;
@@ -77,6 +87,7 @@ nav {
   height: 90%;
   width: 100%;
 }
+
 .lockContainer {
   position: absolute;
   bottom: 5px;
@@ -94,6 +105,7 @@ nav {
   display: flex;
   overflow: hidden;
 }
+
 .taskText {
   resize: none;
   outline: none;
@@ -106,6 +118,7 @@ nav {
   font-weight: 500;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+
 .priotityColors2 {
   height: 100%;
   width: 20%;
@@ -114,6 +127,7 @@ nav {
   justify-content: space-around;
   align-items: center;
 }
+
 .color2 {
   height: 15%;
   width: 80%;
